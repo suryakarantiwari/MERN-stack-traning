@@ -1,0 +1,129 @@
+mysql> \t
+mysql> CREATE TABLE MY_EMPLOYEE
+    -> ( 
+    ->  ID INT(4) PRIMARY KEY AUTO_INCREMENT,
+    -> LAST_NAME VARCHAR(25),
+    -> FIRST_NAME VARCHAR(25),
+    -> USERID VARCHAR(8),
+    -> SALARY FLOAT (9,2)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESC MY_EMPLOYEE;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| ID         | int(4)      | NO   | PRI | NULL    | auto_increment |
+| LAST_NAME  | varchar(25) | YES  |     | NULL    |                |
+| FIRST_NAME | varchar(25) | YES  |     | NULL    |                |
+| USERID     | varchar(8)  | YES  |     | NULL    |                |
+| SALARY     | float(9,2)  | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.02 sec)
+
+mysql> INSERT INTO MY_EMPLOYEE VALUES (1,'PATEL','RALPH','RPATEL',795);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO MY_EMPLOYEE (LAST_NAME,FIRST_NAME,USERID,SALARY)VALUES ('DANC','BETTY','BDANC',860);
+Query OK, 1 row affected (0.00 sec)
+
+
+mysql> SELECT * FROM MY_EMPLOYEE;
++----+-----------+------------+--------+--------+
+| ID | LAST_NAME | FIRST_NAME | USERID | SALARY |
++----+-----------+------------+--------+--------+
+|  1 | PATEL     | RALPH      | RPATEL | 795.00 |
+|  2 | DANC      | BETTY      | BDANC  | 860.00 |
++----+-----------+------------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> \. C:\Users\suryakaran.tiwari\Desktop\Mern_Training\DAY11\loadme.sql
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT* FROM MY_EMPLOYEE;
++----+-----------+------------+----------+---------+
+| ID | LAST_NAME | FIRST_NAME | USERID   | SALARY  |
++----+-----------+------------+----------+---------+
+|  1 | PATEL     | RALPH      | RPATEL   |  795.00 |
+|  2 | DANC      | BETTY      | BDANC    |  860.00 |
+|  3 | BIRI      | BEN        | BBIRI    | 1100.00 |
+|  4 | NEWMAN    | CHAD       | CNEWMAN  |  750.00 |
+|  5 | ROPEBURN  | AUDRY      | AROPEBUR | 1550.00 |
++----+-----------+------------+----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SET autocommit = 0;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> START TRANSACTION ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> UPDATE MY_EMPLOYEE SET FIRST_NAME='DEXTER' WHERE ID=3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE MY_EMPLOYEE SET SALARY=1000 WHERE SALARY<900;
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> SELECT * FROM MY_EMPLOYEE;
++----+-----------+------------+----------+---------+
+| ID | LAST_NAME | FIRST_NAME | USERID   | SALARY  |
++----+-----------+------------+----------+---------+
+|  1 | PATEL     | RALPH      | RPATEL   | 1000.00 |
+|  2 | DANC      | BETTY      | BDANC    | 1000.00 |
+|  3 | BIRI      | DEXTER     | BBIRI    | 1100.00 |
+|  4 | NEWMAN    | CHAD       | CNEWMAN  | 1000.00 |
+|  5 | ROPEBURN  | AUDRY      | AROPEBUR | 1550.00 |
++----+-----------+------------+----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+ mysql> \. C:\Users\suryakaran.tiwari\Desktop\Mern_Training\DAY11\loadme.sql
+ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '4' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '5' for key 'PRIMARY'
+
+Query OK, 1 row affected (0.00 sec)
+mysql> 
+mysql> select * from my_employee;
++----+-----------+------------+-------------+---------+
+| ID | LAST_NAME | FIRST_NAME | USERID      | SALARY  |
++----+-----------+------------+-------------+---------+
+|  1 | PATEL     | RALPH      | RPATEL      | 1000.00 |
+|  2 | DANC      | BETTY      | BDANC       | 1000.00 |
+|  3 | BIRI      | DEXTER     | BBIRI       | 1100.00 |
+|  4 | NEWMAN    | CHAD       | CNEWMAN     | 1000.00 |
+|  5 | ROPEBURN  | AUDRY      | AROPEBUR    | 1550.00 |
+|  6 | Tiwari    | suryakaran | sTiwari     | 4100.00 |
++----+-----------+------------+----------+---------+
+6 rows in set (0.00 sec)
+
+mysql> SAVEPOINT MYSAVPOINT1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM MY_EMPLOYEE;
+Query OK, 6 rows affected (0.00 sec)
+
+mysql> ROLLBACK TO SAVEPOINT MYSAVPOINT1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM MY_EMPLOYEE;
++----+-----------+------------+----------+---------+
+| ID | LAST_NAME | FIRST_NAME | USERID   | SALARY  |
++----+-----------+------------+----------+---------+
+|  1 | PATEL     | RALPH      | RPATEL   | 1000.00 |
+|  2 | DANC      | BETTY      | BDANC    | 1000.00 |
+|  3 | BIRI      | DEXTER     | BBIRI    | 1100.00 |
+|  4 | NEWMAN    | CHAD       | CNEWMAN  | 1000.00 |
+|  5 | ROPEBURN  | AUDRY      | AROPEBUR | 1550.00 |
+|  6 | Tiwari    | surayakaran| sTiwari  | 4100.00 |
++----+-----------+------------+----------+---------+
+6 rows in set (0.00 sec)
+
+
