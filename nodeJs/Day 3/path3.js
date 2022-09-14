@@ -2,7 +2,7 @@ const { basename } = require("path");
 var path = require("path");
 var os = require("os");
 const filename =
-  "C:\\Users\\indranil.champati\\Document\\Module3\\Day3\\read_syn_asyc2.js";
+  "C:\\Users\\suryakaran.tiwari\\Document\\Module3\\Day3\\read_syn_asyc2.js";
 dname = path.dirname(filename);
 bname = path.basename(filename);
 ext = path.extname(filename);

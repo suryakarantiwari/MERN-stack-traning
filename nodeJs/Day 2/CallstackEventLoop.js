@@ -1,4 +1,4 @@
-const welcome = () => console.log("Indranil");
+const welcome = () => console.log("Suryakaran");
 
 const wish = () => console.log("How are you!");
 

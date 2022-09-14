@@ -34,7 +34,7 @@ function fun() {
   setTimeout(turnred, 1500);
   setTimeout(againsquare, 2500);
   setTimeout(green, 3000);
-  console.log("indranil");
+  console.log("suryakaran");
   setTimeout(fadeOut, 3500);
 }
 function fun1() {
