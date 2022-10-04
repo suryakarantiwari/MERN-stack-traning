@@ -1,0 +1,12 @@
+.photo-grid {
+  max-width: 400px;
+  align-self: center;
+  padding-top: 10px;
+}
+.hero-header {
+  margin-bottom: 16px;
+}
+
+.hero-text {
+  margin-top: 0;
+}
